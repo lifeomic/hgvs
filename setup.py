@@ -12,13 +12,13 @@ def read(filename):
     return open(os.path.join(os.path.dirname(__file__), filename)).read()
 
 requires = [
-        'beautifulsoup4==4.4.1'
-    ]
+    'beautifulsoup4==4.4.1',
+    'pyfaidx>=0.4.7.1'
+]
 
 test_requires = [
-    'nose==1.3.7'
+    'nose==1.3.7',
     'flake8==3.5.0'
-    'pyfaidx>=0.4.7.1'
 ]
 
 setup(
