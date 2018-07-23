@@ -3,7 +3,7 @@
 import os.path
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
     from distutils.core import setup
 
@@ -29,7 +29,7 @@ setup(
     url='https://github.com/counsyl/hgvs/',
     description='HGVS name parsing and formatting',
     long_description=read('README.md'),
-    py_modules=('pyhgvs', 'pyhgvs.tests'),
+    packages=find_packages(),
     python_requires=">=2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
     install_requires=requires,
     tests_require=test_requires,
