@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mschroering/hgvs.png?branch=master)](https://travis-ci.org/mschroering/hgvs)
+[![Build Status](https://travis-ci.org/lifeomic/hgvs.png?branch=master)](https://travis-ci.org/lifeomic/hgvs)
 
 HGVS variant name parsing and generation
 ========================================
