@@ -75,7 +75,7 @@ def determine_allele(genome, hgvs_name):
     try:
         chrom, start, ref, alts = normalize_variant(
             chrom, start, ref, [alt], genome).variant
-    except:
+    except Exception:
         messages.append('Variant normalization failed')
 
     return (chrom, start, ref, alts[0]), messages

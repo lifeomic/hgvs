@@ -1,10 +1,10 @@
 
-from StringIO import StringIO
+from io import BytesIO, StringIO
 
 import nose
 try:
-    from pygr.seqdb import SequenceFileDB
-except:
+    from pyfaidx import Fasta as SequenceFileDB
+except ImportError:
     SequenceFileDB
     SequenceFileDB = None
 
@@ -75,7 +75,7 @@ def test_parse_name():
     """
     for name, formatable, expected in _parse_names:
         hgvs_parsed = HGVSName(name)
-        for key, value in expected.items():
+        for key, value in list(expected.items()):
             nose.tools.assert_equal(
                 getattr(hgvs_parsed, key), value,
                 (getattr(hgvs_parsed, key), value, name, expected))
@@ -163,7 +163,7 @@ def test_name_to_variant_refseqs():
     Convert HGVS names to variant coordinates using refseqs directly.
     """
     if not SequenceFileDB:
-        print 'skip test_name_to_variant_refseqs'
+        print('skip test_name_to_variant_refseqs')
         return
     genome = SequenceFileDB('pyhgvs/tests/data/test_refseqs.fa')
 
@@ -659,7 +659,7 @@ _parse_names = [
 _name_variants = [
     # Simple SNPs.
     ('NM_000352.3:c.215A>G', ('chr11', 17496508, 'T', 'C'), True, True),
-    ('NM_000352.3:c.72C>A', ('chr11', 17498252, 'G', 'T'),  True, True),
+    ('NM_000352.3:c.72C>A', ('chr11', 17498252, 'G', 'T'), True, True),
     ('NM_000352.3:c.3885C>G', ('chr11', 17418843, 'G', 'C'), True, True),
 
     # SNPs within introns.
@@ -706,7 +706,7 @@ _name_variants = [
 
     # Delete region.
     ('NM_000016.4:c.291_296delTCTTGG',
-     ('chr1', 76199214, u'AGGTCTT', 'A'),  False, True),
+     ('chr1', 76199214, u'AGGTCTT', 'A'), False, True),
     ('NM_000016.4:c.306_307insG',
      ('chr1', 76199232, u'T', 'TG'), False, True),
     ('NM_000016.4:c.343_348delGGATGT',
@@ -788,4 +788,7 @@ _refgene = '\n'.join([
 
 
 # Mock transcripts.
-_transcripts = read_transcripts(StringIO(_refgene))
+try:
+    _transcripts = read_transcripts(BytesIO(_refgene))
+except TypeError:
+    _transcripts = read_transcripts(StringIO(_refgene))

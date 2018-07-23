@@ -9,6 +9,7 @@ of this software package. Note, the root directory should contain
 Second, obtain genome sequence in FASTA format, which is required in
 example. Genome sequence can be fetched using the following commands:
 
+  cd /tmp
   wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/chromFa.tar.gz
   tar zxvf chromFa.tar.gz
   cat chr*.fa > hg19.fa
@@ -28,10 +29,10 @@ The following output should be displayed:
 
 import pyhgvs as hgvs
 import pyhgvs.utils as hgvs_utils
-from pygr.seqdb import SequenceFileDB
+from pyfaidx import Fasta
 
-# Read genome sequence using pygr.
-genome = SequenceFileDB('hg19.fa')
+# Read genome sequence using pyfaidx.
+genome = Fasta('hg19.fa')
 
 # Read RefSeq transcripts into a python dict.
 with open('pyhgvs/data/genes.refGene') as infile:
@@ -46,7 +47,7 @@ def get_transcript(name):
 # Parse the HGVS name into genomic coordinates and alleles.
 chrom, offset, ref, alt = hgvs.parse_hgvs_name(
     'NM_000352.3:c.215A>G', genome, get_transcript=get_transcript)
-print chrom, offset, ref, alt
+print(chrom, offset, ref, alt)
 # Returns variant in VCF style: ('chr11', 17496508, 'T', 'C')
 # Notice that since the transcript is on the negative strand, the alleles
 # are reverse complemented during conversion.
@@ -57,7 +58,7 @@ chrom, offset, ref, alt = ('chr11', 17496508, 'T', 'C')
 transcript = get_transcript('NM_000352.3')
 hgvs_name = hgvs.format_hgvs_name(
     chrom, offset, ref, alt, genome, transcript)
-print hgvs_name
+print(hgvs_name)
 # Returns 'NM_000352.3(ABCC8):c.215A>G'
 
 

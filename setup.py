@@ -14,11 +14,11 @@ def read(filename):
 requires = [
         'beautifulsoup4==4.4.1'
     ]
-    
+
 test_requires = [
-    'nose==1.3.4'
-    'flake8==2.2.5'
-    'pygr==0.8.2'
+    'nose==1.3.7'
+    'flake8==3.5.0'
+    'pyfaidx>=0.4.7.1'
 ]
 
 setup(

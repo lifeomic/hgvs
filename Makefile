@@ -36,7 +36,7 @@ clean:
 	find $(PACKAGE_NAME) -type f -name '*.pyc' -delete
 
 lint: venv
-	$(WITH_VENV) flake8 --jobs=auto $(PACKAGE_NAME)/ $(SCRIPTS)
+	$(WITH_VENV) flake8 --ignore E501 --jobs=auto $(PACKAGE_NAME)/ $(SCRIPTS)
 
 test: venv
 	$(WITH_VENV) nosetests --verbosity=2 --with-xunit --xunit-file=$(TEST_OUTPUT)

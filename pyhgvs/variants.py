@@ -173,13 +173,13 @@ class NormalizedVariant(object):
             seq_3p = self.seq_3p
             self.seq_5p = revcomp(seq_3p)
             self.seq_3p = revcomp(seq_5p)
-            self.alleles = map(revcomp, self.alleles)
+            self.alleles = [revcomp(allele) for allele in self.alleles]
 
     def _trim_common_prefix(self):
         """
         Trim the common prefix amongst all alleles.
         """
-        minlength = min(map(len, self.alleles))
+        minlength = min(list(map(len, self.alleles)))
         common_prefix = 0
         for i in range(minlength):
             if len(set(allele[i] for allele in self.alleles)) > 1:
@@ -199,9 +199,9 @@ class NormalizedVariant(object):
         """
         Trim the common suffix amongst all alleles.
         """
-        minlength = min(map(len, self.alleles))
+        minlength = min(list(map(len, self.alleles)))
         common_suffix = 0
-        for i in range(1, minlength+1):
+        for i in range(1, minlength + 1):
             if len(set(allele[-i] for allele in self.alleles)) > 1:
                 # Not all alleles match at this site, so common suffix ends.
                 break
