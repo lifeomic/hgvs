@@ -13,7 +13,7 @@ def read(filename):
 
 requires = [
     'beautifulsoup4==4.4.1',
-    'pyfaidx>=0.4.7.1'
+    'pyfaidx>=0.5.4'
 ]
 
 test_requires = [
