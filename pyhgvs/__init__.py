@@ -144,6 +144,7 @@ class HGVSRegex(object):
 
         # Substitution
         CDNA_START + DNA_REF + SUB + DNA_ALT,
+        CDNA_RANGE + DNA_REF + SUB + DNA_ALT,
 
         # 1bp insertion, deletion, duplication
         CDNA_START + INS + DNA_ALT,
